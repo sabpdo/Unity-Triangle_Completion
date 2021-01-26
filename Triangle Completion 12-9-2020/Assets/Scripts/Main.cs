@@ -194,7 +194,7 @@ public class Main : MonoBehaviour
                 if (left == true) //Left handed triangle
                 {
                     //First Hallway Right Side
-                    for (int x = 1; x <= 10; x++)
+                    for (int x = 1; x <= 15; x++)
                     {
                         Vector3 pos = new Vector3(3, 3, (10 * x));
                         GameObject newWall = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 0.0f, 90.0f));
@@ -202,7 +202,7 @@ public class Main : MonoBehaviour
                     }
 
                     //First Hallway Left Side
-                    for (int x = 1; x <= 10; x++)
+                    for (int x = 1; x <= 15; x++)
                     {
                         Vector3 pos = new Vector3(-3, 3, (10 * x));
                         GameObject newWall2 = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 180.0f, 90.0f));
@@ -218,7 +218,7 @@ public class Main : MonoBehaviour
                 {
                     Debug.Log("Trial has started.");
                     //First Hallway Right Side
-                    for (int x = 1; x <= 10; x++)
+                    for (int x = 1; x <= 15; x++)
                     {
                         Vector3 pos = new Vector3(3, 3, (10 * x));
                         GameObject newWallR = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 0.0f, 90.0f));
@@ -226,7 +226,7 @@ public class Main : MonoBehaviour
                     }
 
                     //First Hallway Left Side
-                    for (int x = 1; x <= 11; x++)
+                    for (int x = 1; x <= 15; x++)
                     {
                         Vector3 pos = new Vector3(-3, 3, (10 * x));
                         GameObject newWall2R = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 180.0f, 90.0f));
@@ -496,14 +496,14 @@ public class Main : MonoBehaviour
                             if (type == right1)
                             {
                                 //Create hallway
-                                for (int x = 1; x < 13; x++)
+                                for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(7 + (-8 * x), 3, 33);
                                     GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 270f, 90f));
                                     newWall2.tag = "wall2";
                                 }
 
-                                for (int x = 1; x < 13; x++)
+                                for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(7 + (-8 * x), 3, 25);
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 270f, 90f));
@@ -519,14 +519,14 @@ public class Main : MonoBehaviour
                             {
                                 
                                     //Create hallway
-                                    for (int x = 1; x < 13; x++)
+                                    for (int x = 1; x < 20; x++)
                                     {
                                         Vector3 posSecond = new Vector3(7 + (-8 * x), 3, 65);
                                         GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 270f, 90f));
                                         newWall2.tag = "wall2";
                                     }
 
-                                    for (int x = 1; x < 13; x++)
+                                    for (int x = 1; x < 20; x++)
                                     {
                                         Vector3 posSecond2 = new Vector3(7 + (-8 * x), 3, 73);
                                         GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 270f, 90f));
@@ -568,13 +568,13 @@ public class Main : MonoBehaviour
                             if (type == acute1)
                             {
                                 //Create hallway
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((7 + (x * -5 * Mathf.Sqrt(3))), 3, 55 + (x*-5));
                                     GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 240f, 90f));
                                     newWall2.tag = "wall2";
                                 }
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3((7 + (x * -5 * Mathf.Sqrt(3))), 3, 46 + (x * -5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 240f, 90f));
@@ -589,13 +589,13 @@ public class Main : MonoBehaviour
                             {
 
                                 //Create hallway
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((x * -5 * Mathf.Sqrt(3)), 3, 52 + (x * -5));
                                     GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 240f, 90f));
                                     newWall2.tag = "wall2";
                                 }
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3((x * -5 * Mathf.Sqrt(3)), 3, 46 + (x * -5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 240f, 90f));
@@ -642,14 +642,14 @@ public class Main : MonoBehaviour
                             if (type == obtuse1)
                             {
                                 //Create hallway
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 33 + (x*5));
                                     GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 300f, 90f));
                                     newWall2.tag = "wall2";
                                 }
 
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 25 + (x * 5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 300f, 90f));
@@ -666,14 +666,14 @@ public class Main : MonoBehaviour
                             else if (type == obtuse2)
                             {
                                 //Create hallway
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 73 + (x * 5));
                                     GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 300f, 90f));
                                     newWall2.tag = "wall2";
                                 }
 
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 65 + (x * 5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 300f, 90f));
@@ -722,14 +722,14 @@ public class Main : MonoBehaviour
                             if (type == right1)
                             {
                                 //Create hallway
-                                for (int x = 1; x < 13; x++)
+                                for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(-8 + (8 * x), 3, 33);
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 90f, 90f));
                                     newWall2R.tag = "wall2R";
                                 }
 
-                                for (int x = 1; x < 13; x++)
+                                for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(-8 + (8 * x), 3, 25);
                                     GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 90f, 90f));
@@ -745,14 +745,14 @@ public class Main : MonoBehaviour
                             else if (type == right2)
                             {
                                 //Create hallway
-                                for (int x = 1; x < 13; x++)
+                                for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(-8 + (8 * x), 3, 73);
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 90f, 90f));
                                     newWall2R.tag = "wall2R";
                                 }
 
-                                for (int x = 1; x < 13; x++)
+                                for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(-8 + (8 * x), 3, 65);
                                     GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 90f, 90f));
@@ -794,14 +794,14 @@ public class Main : MonoBehaviour
                             if (type == acute1)
                             {
                                 //Create hallway
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((x * 5 * Mathf.Sqrt(3)), 3, 46 + (x * -5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 120f, 90f));
                                     newWall2R.tag = "wall2R";
                                 }
 
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3((x * 5 * Mathf.Sqrt(3)), 3, 52+ (x * -5));
                                     GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 120f, 90f));
@@ -817,14 +817,14 @@ public class Main : MonoBehaviour
                             else if (type == acute2)
                             {
                                 //Create hallway 
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((x * 5 * Mathf.Sqrt(3)), 3, 46 + (x * -5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 120f, 90f));
                                     newWall2R.tag = "wall2R";
                                 }
 
-                                for (int x = 0; x < 13; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(x * 5 * Mathf.Sqrt(3), 3, 52 + (x * -5));
                                     GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 120f, 90f));
@@ -870,14 +870,14 @@ public class Main : MonoBehaviour
                             if (type == obtuse1)
                             {
                                 //Create hallway
-                                for (int x = 0; x < 12; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 33 + (x * 5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 60f, 90f));
                                     newWall2R.tag = "wall2R";
                                 }
 
-                                for (int x = 0; x < 12; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 25 + (x * 5));
                                     GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 60f, 90f));
@@ -893,14 +893,14 @@ public class Main : MonoBehaviour
                             else if (type == obtuse2)
                             {
                                 //Create hallway
-                                for (int x = 0; x < 12; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 72 + (x * 5));
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 60f, 90f));
                                     newWall2R.tag = "wall2R";
                                 }
 
-                                for (int x = 0; x < 12; x++)
+                                for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 66 + (x * 5));
                                     GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 60f, 90f));
@@ -1019,7 +1019,7 @@ public class Main : MonoBehaviour
                     else if (typeTriangle == obtuse && ObtuseNumber<16)
                     {
                         int variant = Random.Range(305, 307);
-                        current = acute;
+                        current = obtuse;
                         if (variant == obtuse1 && left == true && leftObtuseNumber1 < 4)
                             type = obtuse1;
                         else if (variant == obtuse2 && left == true && leftObtuseNumber2 < 4)
@@ -1135,8 +1135,7 @@ public class Main : MonoBehaviour
                         else if (variant == obtuse1 && left == false && rightObtuseNumber1 < 4)
                             type = obtuse1;
                         else if (variant == obtuse2 && left == false && rightObtuseNumber2 < 4)
-                            type = obtuse2;
-                        
+                            type = obtuse2; 
                     }
                     else
                     {
