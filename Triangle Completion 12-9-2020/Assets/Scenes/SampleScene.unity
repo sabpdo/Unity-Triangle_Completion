@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc52b336877b44472a90b57c4bffd241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 4320757308504901941, guid: 5528101b0302c456ea9630cbc5c179ed, type: 3}
+  wall: {fileID: 4686518146467120744, guid: adabc42c5fbe8445c8a719f57a851b0e, type: 3}
   player: {fileID: 1866324769}
 --- !u!82 &1866324776
 AudioSource:
