@@ -6,15 +6,12 @@ using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
+    //instructions
     public Text instructions;
-    //To generate random numbers
-    Random rnd = new Random();
 
     //To set off values in update
     private bool firstCylinder = false;
     private bool secondCylinder = false;
-    private bool firstPoleOpen = false;
-
     private bool thirdLegOpen = false;
 
     //Variant values
@@ -42,8 +39,6 @@ public class Main : MonoBehaviour
 
     private int AcuteNumber = 0;
 
-    private int equilateral; //when does equilateral come in? I don't see it
-
     private const int obtuse = 3;
     private const int obtuse1 = 305; //2,4,120
     private const int obtuse2 = 306; //6,4,120
@@ -54,21 +49,24 @@ public class Main : MonoBehaviour
 
     private int ObtuseNumber = 0;
 
-    public bool openField; //How often is the open field condition?
+    //For Open Field - if open Field or not
+    public bool openField; 
 
+    //Keep track of current type of triangle
     public int current;
     public int type;
 
-    //Track number of Spaces
+    //Track number of User Pressed Spaces
     private int numSpace = 0;
 
-    //All GameObjects
+    //All Main GameObjects
     public GameObject wall;
     public GameObject startingPole;
     public GameObject SecondPole;
     public GameObject ThirdPole;
     public GameObject cylinder;
-    //(For open field)
+
+    //For open field
     public GameObject openFieldPole;
     public GameObject secondOpenFieldPole;
 
@@ -82,13 +80,15 @@ public class Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Initialize Audio
         source = GetComponent<AudioSource>();
         source.Stop();
 
+        //Ensure boolean values are false
         firstCylinder = false;
         secondCylinder = false;
-        firstPoleOpen = false;
 
+        //Set Initial GameObjects Active or not Active
         startingPole.SetActive(true);
         wall.SetActive(true);
         openFieldPole.SetActive(false);
@@ -135,20 +135,23 @@ public class Main : MonoBehaviour
             else
                 type = obtuse2;
         }
+        //Instructions
         instructions.text = "Please walk forward.";
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //Upon the collision of the First Pole
-        if (collision.gameObject.CompareTag("StartPole")) //If you collide with the Starting Pole
+        if (collision.gameObject.CompareTag("StartPole"))
         {
-            
             //Moving player to original position
             transform.position = new Vector3(0f, 0f, 9f);
-            Debug.Log("Trial has started.");
-            startingPole.SetActive(false); //Deactivate the First Starting Pole
+
+            //Deactivate the First Starting Pole and SetActive the Second Pole
+            startingPole.SetActive(false); 
             SecondPole.SetActive(true);
+
+            //Move SecondPole to appropriate place
             if (current == right)
             {
                 if (type == right1)
@@ -175,10 +178,6 @@ public class Main : MonoBehaviour
                     SecondPole.SetActive(true);
                 }
             }
-            else if (current == equilateral)
-            {
-
-            }
             else if (current == obtuse)
             {
                 if (type == obtuse1)
@@ -192,16 +191,16 @@ public class Main : MonoBehaviour
                     SecondPole.SetActive(true);
                 }
             }
-            if (openField==true)
-            {
-                instructions.text = "Walk forward until you hear a chime.";
-            }
 
+            //If Open Field
             if (openField == false)
             {
+                //Instructions
                 instructions.text = "Walk forward in the corridor until you hear a chime " +
                     "\n and are located in a cylinder.";
-                if (left == true) //Left handed triangle
+
+                //Left handed triangle
+                if (left == true) 
                 {
                     //First Hallway Right Side
                     for (int x = 1; x <= 15; x++)
@@ -224,9 +223,9 @@ public class Main : MonoBehaviour
                     GameObject newBackWall = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(0.0f, 90.0f, 90.0f));
                     newBackWall.tag = "wall1";
                 }
+                //Right handed Triangle
                 else if (left == false)
                 {
-                    Debug.Log("Trial has started.");
                     //First Hallway Right Side
                     for (int x = 1; x <= 15; x++)
                     {
@@ -249,20 +248,30 @@ public class Main : MonoBehaviour
                     newBackWallR.tag = "wall1R";
                 }
             }
+            //If Open Field
             else if (openField == true)
             {
                 openFieldPole.SetActive(true);
+                instructions.text = "Walk forward until you hear a chime.";
             }
         }
 
+        //Upon Collision of Second Pole
         if (collision.gameObject.CompareTag("SecondPole"))
         {
+            //Set Off Boolean Value in Update
             firstCylinder = true;
-            //Broadcast
+
+            //Instructions
             instructions.text = "First Leg Completed. Please turn until you hear a second chime.";
+
+            //Sound
             source.PlayOneShot(sound, 1.0f);
+
+            //Deactivate SecondPole
             SecondPole.SetActive(false);
 
+            //Right Handed Triangle - Code to Situate ThirdPole+SecondOpenFieldPole properly
             if (left == false)
             {
                 if (current == right)
@@ -295,10 +304,6 @@ public class Main : MonoBehaviour
                         secondOpenFieldPole.transform.position = new Vector3(86.6f, 3f, -1f);
                     }
                 }
-                else if (current == equilateral)
-                {
-
-                }
                 else if (current == obtuse)
                 {
                     if (type == obtuse1)
@@ -315,7 +320,7 @@ public class Main : MonoBehaviour
                     }
                 }
             }
-            
+            //Left Handed Triangle
             else if (left == true)
             {
                 if (current == right)
@@ -348,10 +353,6 @@ public class Main : MonoBehaviour
                         secondOpenFieldPole.transform.position = new Vector3(-86.6f, 3f, -1f);
                     }
                 }
-                else if (current == equilateral)
-                {
-
-                }
                 else if (current == obtuse)
                 {
                     if (type == obtuse1)
@@ -369,12 +370,14 @@ public class Main : MonoBehaviour
                 } 
             }
 
+            //If non-Open Field
             if (openField == false)
             {
                 //Create the cylinder container
                 Instantiate(cylinder);
                 cylinder.tag = "cylinder";
 
+                //Move cylinder to proper place depending on triangle
                 if (current == right)
                 {
                     if (type == right1)
@@ -398,10 +401,6 @@ public class Main : MonoBehaviour
                         cylinder.transform.position = new Vector3(0f, 0f, 49f);
                     }
                 }
-                else if (current == equilateral)
-                {
-
-                }
                 else if (current == obtuse)
                 {
                     if (type == obtuse1)
@@ -413,7 +412,8 @@ public class Main : MonoBehaviour
                         cylinder.transform.position = new Vector3(0f, -0.5f, 69f);
                     }
                 }
-            
+
+                //Destroy walls if non-Open Field
                 if (left == true)
                 {
                     //Destroy previous hallway, second pole indicator
@@ -423,7 +423,6 @@ public class Main : MonoBehaviour
                         go.SetActive(false);
                     }
                 }
-
                 else if (left == false)
                 {
                     //Destroy previous hallway, deactivate second pole indicator
@@ -436,6 +435,7 @@ public class Main : MonoBehaviour
             }
             else if (openField == true)
             {
+                //Deactivate first OpenFieldPole
                 openFieldPole.SetActive(false);
             }
         }
@@ -443,23 +443,27 @@ public class Main : MonoBehaviour
         //Upon the collision of the Third Pole
         if (collision.gameObject.CompareTag("ThirdPole"))
         {
+            //Deactivate Third Pole indicator
             ThirdPole.SetActive(false);
-            source.PlayOneShot(sound, 1.0f);
 
+            //Sound
+            source.PlayOneShot(sound, 1.0f);
+            
             if (openField == false)
             {
-                instructions.text = "Second Leg Completed. Please turn until you " +
-                    "\n believe you are facing the correct direction of where you started. " +
-                    "\n When you are at the " +
-                    "\n desired turn angle, press space once" +
-                    "\n and another hallway will appear. " +
+                //instructions
+                instructions.text = "Second Leg Completed. Please turn until you believe you " +
+                    "\n are facing the correct direction of where you started. When you are at the " +
+                    "\n desired turn angle, press space once and another hallway will appear. " +
                     "\n Travel down the hallway and press space once when you believe you are " +
                     "\n at the starting location.";
+
+                //Second Cylinder boolean value for update
                 secondCylinder = true;
 
+                //Code to destroy Previous Walls
                 if (left == true)
                 {
-                    //Destroy previous walls
                     GameObject[] args = GameObject.FindGameObjectsWithTag("wall2");
                     foreach (GameObject go in args)
                     {
@@ -468,7 +472,6 @@ public class Main : MonoBehaviour
                 }
                 else if (left == false)
                 {
-                    //Destroy previous walls
                     GameObject[] args = GameObject.FindGameObjectsWithTag("wall2R");
                     foreach (GameObject go in args)
                     {
@@ -478,9 +481,12 @@ public class Main : MonoBehaviour
             }
             else if (openField == true)
             {
+                //Boolean Value to Set Off Code in Update
                 thirdLegOpen = true;
+                //Instructions
                 instructions.text = "Second Leg Completed. Please return to where you believe you started. " +
                     "\nWhen you think you have reached your initial position, please press space once.";
+                //Deactivate SecondOpenFieldPole
                 secondOpenFieldPole.SetActive(false);
             }
         }
@@ -496,8 +502,13 @@ public class Main : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y < 273 && transform.localEulerAngles.y > 267)
                     {
+                        //Instructions
                         instructions.text = "Walk forward until you hear a chime. ";
+
+                        //Sound
                         source.PlayOneShot(sound, 1.0f);
+
+                        //Reset boolean value
                         firstCylinder = false;
 
                         if (openField == false)
@@ -532,33 +543,33 @@ public class Main : MonoBehaviour
                             }
                             else if (type == right2)
                             {
-                                
-                                    //Create hallway
-                                    for (int x = 1; x < 20; x++)
-                                    {
-                                        Vector3 posSecond = new Vector3(7 + (-8 * x), 3, 65);
-                                        GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 270f, 90f));
-                                        newWall2.tag = "wall2";
-                                    }
+                                //Create hallway
+                                for (int x = 1; x < 20; x++)
+                                {
+                                    Vector3 posSecond = new Vector3(7 + (-8 * x), 3, 65);
+                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 270f, 90f));
+                                    newWall2.tag = "wall2";
+                                }
 
-                                    for (int x = 1; x < 20; x++)
-                                    {
-                                        Vector3 posSecond2 = new Vector3(7 + (-8 * x), 3, 73);
-                                        GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 270f, 90f));
-                                        newWall2R.tag = "wall2";
-                                    }
+                                for (int x = 1; x < 20; x++)
+                                {
+                                    Vector3 posSecond2 = new Vector3(7 + (-8 * x), 3, 73);
+                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 270f, 90f));
+                                    newWall2R.tag = "wall2";
+                                }
 
-                                    //Create back wall
-                                    Vector3 pos3 = new Vector3(3, 3, 69);
-                                    GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 180f, 90f));
-                                    newBackWall2.tag = "wall2";
+                                //Create back wall
+                                Vector3 pos3 = new Vector3(3, 3, 69);
+                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 180f, 90f));
+                                newBackWall2.tag = "wall2";
             
                             }
                         }
                         else if (openField == true)
                         {
+                            //Deactivate SecondOpenFieldPole (again)
                             secondOpenFieldPole.SetActive(true);
-
+                            //Set Third Pole to Active
                             ThirdPole.SetActive(true);
                         }
                     }
@@ -601,7 +612,6 @@ public class Main : MonoBehaviour
                             }
                             else if (type == acute2)
                             {
-
                                 //Create hallway
                                 for (int x = 0; x < 20; x++)
                                 {
@@ -631,8 +641,6 @@ public class Main : MonoBehaviour
 
                 else if (current == obtuse) 
                 {
-                    
-                    //play sound until Angle stops
                     if (transform.localEulerAngles.y < 303 && transform.localEulerAngles.y > 297)
                     {
                         instructions.text = "Walk forward until you hear a chime. ";
@@ -688,7 +696,6 @@ public class Main : MonoBehaviour
                                     GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 300f, 90f));
                                     newWall2R.tag = "wall2";
                                 }
-
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 69);
@@ -982,11 +989,11 @@ public class Main : MonoBehaviour
                 else if (current == acute)
                     AcuteNumber++;
 
+                //Instructions
                 instructions.text = "Please walk back to the starting cone.";
 
-                int previous = type;
-
                 //Determine starting type triangle
+                int previous = type;
                 while (previous==type)
                 {
                     int typeTriangle = Random.Range(1, 4);
@@ -1039,7 +1046,8 @@ public class Main : MonoBehaviour
             }
         }
 
-        if (thirdLegOpen == true) //FOR OPEN FIELD VARIANT
+        //FOR OPEN FIELD VARIANT
+        if (thirdLegOpen == true) 
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -1052,6 +1060,8 @@ public class Main : MonoBehaviour
                 numSpace = 0;
 
                 startingPole.SetActive(true);
+
+                //Instructions
                 instructions.text = "Please walk back to the starting cone.";
 
                 //To Keep Track of How Many of Each Trial Completed, Taking Account of Hand, Triangle, and Type
