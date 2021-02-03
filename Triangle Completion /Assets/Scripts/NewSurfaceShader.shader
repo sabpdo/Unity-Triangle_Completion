@@ -1,5 +1,6 @@
 ﻿Shader "Custom/NewSurfaceShader"
 {
+//*********I'm not sure if I even used this script but just left it in case'
     Properties
     {
         _Color ("Color", Color) = (1,1,1,1)
