@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
-
     public Text instructions;
     //To generate random numbers
     Random rnd = new Random();
@@ -136,7 +135,7 @@ public class Main : MonoBehaviour
             else
                 type = obtuse2;
         }
-        instructions.text = "Please walk into the cone.";
+        instructions.text = "Please walk forward.";
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -200,7 +199,8 @@ public class Main : MonoBehaviour
 
             if (openField == false)
             {
-                instructions.text = "Walk forward in the corridor until you hear a chime and are located in a cylinder.";
+                instructions.text = "Walk forward in the corridor until you hear a chime " +
+                    "\n and are located in a cylinder.";
                 if (left == true) //Left handed triangle
                 {
                     //First Hallway Right Side
@@ -259,7 +259,6 @@ public class Main : MonoBehaviour
         {
             firstCylinder = true;
             //Broadcast
-            Debug.Log("First Leg Completed. Please turn until you hear a second chime.");
             instructions.text = "First Leg Completed. Please turn until you hear a second chime.";
             source.PlayOneShot(sound, 1.0f);
             SecondPole.SetActive(false);
@@ -449,8 +448,13 @@ public class Main : MonoBehaviour
 
             if (openField == false)
             {
-                Debug.Log("Second Leg Completed. Please turn until you believe you are facing the correct direction of where you started.");
-                instructions.text = "Second Leg Completed. Please turn until you believe you are facing the correct direction of where you started.";
+                instructions.text = "Second Leg Completed. Please turn until you " +
+                    "\n believe you are facing the correct direction of where you started. " +
+                    "\n When you are at the " +
+                    "\n desired turn angle, press space once" +
+                    "\n and another hallway will appear. " +
+                    "\n Travel down the hallway and press space once when you believe you are " +
+                    "\n at the starting location.";
                 secondCylinder = true;
 
                 if (left == true)
@@ -475,8 +479,8 @@ public class Main : MonoBehaviour
             else if (openField == true)
             {
                 thirdLegOpen = true;
-                Debug.Log("Second Leg Completed. Please return to where you believe you started. When you think you have reached your initial position, please press space once.");
-                instructions.text = "Second Leg Completed. Please return to where you believe you started. When you think you have reached your initial position, please press space once.";
+                instructions.text = "Second Leg Completed. Please return to where you believe you started. " +
+                    "\nWhen you think you have reached your initial position, please press space once.";
                 secondOpenFieldPole.SetActive(false);
             }
         }
@@ -488,14 +492,11 @@ public class Main : MonoBehaviour
         {
             if (firstCylinder == true) //After colliding with Second Pole
             {
-                instructions.text = "Walk forward in the corridor until you hear a chime.";
                 if (current == right)
                 {
-                    //play sound until Angle stops
                     if (transform.localEulerAngles.y < 273 && transform.localEulerAngles.y > 267)
                     {
-                        //Broadcast
-                        Debug.Log("Move forward.");
+                        instructions.text = "Walk forward until you hear a chime. ";
                         source.PlayOneShot(sound, 1.0f);
                         firstCylinder = false;
 
@@ -566,8 +567,7 @@ public class Main : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y < 243 && transform.localEulerAngles.y > 237)
                     {
-                        //Broadcast
-                        Debug.Log("Move forward.");
+                        instructions.text = "Walk forward until you hear a chime. ";
                         source.PlayOneShot(sound, 1.0f);
                         firstCylinder = false;
 
@@ -629,20 +629,15 @@ public class Main : MonoBehaviour
                     }
                 }
 
-                else if (current == equilateral)
-                {
-                      
-                }
                 else if (current == obtuse) 
                 {
                     
-                        //play sound until Angle stops
-                        if (transform.localEulerAngles.y < 303 && transform.localEulerAngles.y > 297)
-                        {
-                            //Broadcast
-                            Debug.Log("Move forward.");
-                            source.PlayOneShot(sound, 1.0f);
-                            firstCylinder = false;
+                    //play sound until Angle stops
+                    if (transform.localEulerAngles.y < 303 && transform.localEulerAngles.y > 297)
+                    {
+                        instructions.text = "Walk forward until you hear a chime. ";
+                        source.PlayOneShot(sound, 1.0f);
+                        firstCylinder = false;
 
                         if (openField == false)
                         {
@@ -715,13 +710,11 @@ public class Main : MonoBehaviour
         {
             if (firstCylinder == true)
             {
-                instructions.text = "Walk forward in the corridor until you hear a chime.";
                 if (current == right)
                 {
                     if (transform.localEulerAngles.y > 87 && transform.localEulerAngles.y < 93)
                     {
-                        //Broadcast
-                        Debug.Log("Move down the second hallway.");
+                        instructions.text = "Walk forward until you hear a chime. ";
                         source.PlayOneShot(sound, 1.0f);
                         firstCylinder = false;
 
@@ -790,10 +783,9 @@ public class Main : MonoBehaviour
                 }
                 else if (current == acute)
                 {
-                    if (transform.localEulerAngles.y > 117 && transform.localEulerAngles.y < 123)//CHANGE
+                    if (transform.localEulerAngles.y > 117 && transform.localEulerAngles.y < 123)
                     {
-                        //Broadcast
-                        Debug.Log("Move down the second hallway.");
+                        instructions.text = "Walk forward until you hear a chime. ";
                         source.PlayOneShot(sound, 1.0f);
                         firstCylinder = false;
 
@@ -860,16 +852,11 @@ public class Main : MonoBehaviour
                         }
                     }
                 }
-                else if (current  == equilateral)
-                {
-                    
-                }
                 else if (current == obtuse)
                 {
                     if (transform.localEulerAngles.y > 57 && transform.localEulerAngles.y < 63) 
                     {
-                        //Broadcast
-                        Debug.Log("Move down the second hallway.");
+                        instructions.text = "Walk forward until you hear a chime. ";
                         source.PlayOneShot(sound, 1.0f);
                         firstCylinder = false;
 
@@ -996,7 +983,6 @@ public class Main : MonoBehaviour
                     AcuteNumber++;
 
                 instructions.text = "Please walk back to the starting cone.";
-                Debug.Log("Please walk back to the starting cone.");
 
                 int previous = type;
 
@@ -1066,7 +1052,6 @@ public class Main : MonoBehaviour
                 numSpace = 0;
 
                 startingPole.SetActive(true);
-                Debug.Log("Please walk back to the starting cone.");
                 instructions.text = "Please walk back to the starting cone.";
 
                 //To Keep Track of How Many of Each Trial Completed, Taking Account of Hand, Triangle, and Type
