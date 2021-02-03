@@ -56,11 +56,11 @@ public class ThirdHallway : MonoBehaviour
         playerPositionz = transform.position.z;
         if (openField == false)
         {
-            Vector3 posSecond3 = new Vector3(playerPositionx+4, 3, playerPositionz+4);
+            Vector3 posSecond3 = new Vector3(playerPositionx+10, 3, playerPositionz+10);
             GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation, 90f));
             newWallL2.tag = "wallL";
 
-            Vector3 posSecond = new Vector3(playerPositionx - 4, 3, playerPositionz- 4);
+            Vector3 posSecond = new Vector3(playerPositionx - 7, 3, playerPositionz- 10);
             GameObject newWallL = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, yrotation, 90f));
             newWallL.tag = "wallL";
         }
