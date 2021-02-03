@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class was created to generate the infinite terrain/floor for the task.
+
+//Class to keep track and create tiles
 class Tile
 {
     public GameObject theTile;
@@ -14,6 +17,7 @@ class Tile
     }
 }
 
+//Generate Infinite Terrain
 public class GenerateInfiniteTerrain : MonoBehaviour
 {
     public GameObject plane;
@@ -30,11 +34,12 @@ public class GenerateInfiniteTerrain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Initialize to 0
         this.gameObject.transform.position = Vector3.zero;
         startPos = Vector3.zero;
-
+        //Update and situate time
         float updateTime = Time.realtimeSinceStartup;
-
+        //Create tiles that player is standing on before start
         for (int x = -halfTilesX; x < halfTilesZ; x++)
         {
             for (int z = -halfTilesZ; z < halfTilesZ; z++)
