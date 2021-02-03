@@ -7,34 +7,77 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public GameObject loadingScreen;
-    Slider progressBar;
-    public string sceneToLoad;
+    public Slider progressBar;
     AsyncOperation loadingOperation;
     public CanvasGroup canvasGroup;
-    
 
-    List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    public Text instruction;
+    public Text welcome;
+
+    private int numSpace = 0;
+    private bool temp=false;
+
     // Start is called before the first frame update
     public void Start()
     {
+        //SceneManager.LoadSceneAsync("WelcomeInstructions");
+        loadingScreen.SetActive(false);
 
     }
-   
-
     
-    public void StartGame()
+
+    // Update is called once per frame
+    void Update()
     {
+        if (temp == true)
+        {
+            progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
+        }
+
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            numSpace++;
+        }
+
+        if (numSpace == 1)
+        {
+            welcome.text = "";
+            instruction.text = "Welcome to Triangle Completion. In this task, you will be traversing " +
+                "\n the first two legs of a triangle and will be in charge of finding your way " +
+                "\n back to your original position. Follow the instructions for the task" +
+                "\n in the upper left hand corner.";
+        }
+        if (numSpace >= 2)
+        {
+            StartGame();
+
+        }
+
+    }
+
+    void StartGame()
+    {
+        //Load MainScene
+        SceneManager.LoadSceneAsync("MainScene");
+        loadingOperation = SceneManager.LoadSceneAsync("MainScene");
+        welcome.text = "";
+        instruction.text = "";
+        //Triggers IEnumerator
         StartCoroutine(StartLoad());
+        //Unload beginning scene with instructions
         SceneManager.UnloadSceneAsync("WelcomeInstructions");
+        temp = true;
     }
 
     IEnumerator StartLoad()
     {
+        //Set the loading Screen to Active
         loadingScreen.SetActive(true);
         yield return StartCoroutine(FadeLoadingScreen(1, 1));
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
-        while(!operation.isDone)
+        AsyncOperation operation = SceneManager.LoadSceneAsync("MainScene");
+        while (!operation.isDone)
         {
             yield return null;
         }
@@ -43,13 +86,13 @@ public class MainMenu : MonoBehaviour
         loadingScreen.SetActive(false);
     }
 
+    //To fade loading Screen
     IEnumerator FadeLoadingScreen(float targetValue, float duration)
     {
         float startValue = canvasGroup.alpha;
         float time = 0;
 
-        while (time<duration)
-
+        while (time < duration)
         {
             canvasGroup.alpha = Mathf.Lerp(startValue, targetValue, time / duration);
             time += Time.deltaTime;
@@ -58,10 +101,4 @@ public class MainMenu : MonoBehaviour
         canvasGroup.alpha = targetValue;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
-        
-    }
 }
