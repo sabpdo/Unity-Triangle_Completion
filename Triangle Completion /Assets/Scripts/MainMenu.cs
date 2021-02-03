@@ -15,31 +15,32 @@ public class MainMenu : MonoBehaviour
     public Text welcome;
 
     private int numSpace = 0;
-    private bool temp=false;
+    private bool temp = false;
 
     // Start is called before the first frame update
     public void Start()
     {
         //SceneManager.LoadSceneAsync("WelcomeInstructions");
         loadingScreen.SetActive(false);
-
     }
     
 
     // Update is called once per frame
     void Update()
     {
+        //To make slider accord to how much of the scene has loaded
         if (temp == true)
         {
             progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
         }
 
-        
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             numSpace++;
         }
 
+        //Instructions
         if (numSpace == 1)
         {
             welcome.text = "";
@@ -48,18 +49,20 @@ public class MainMenu : MonoBehaviour
                 "\n back to your original position. Follow the instructions for the task" +
                 "\n in the upper left hand corner.";
         }
+
+        //Instructions
         if (numSpace == 2)
         {
             instruction.text = "To move around in the virtual environment, press" +
                 "\n WASD, A and D to turn left and right respectively, and W and S to move forward " +
                 "\n and backward. Please also do not stray from the instructions/designated path.";
         }
+
+        //Starts Class StartGame to Start Transition and Loading of Main Scene
         if (numSpace >= 3)
         {
             StartGame();
-
         }
-
     }
 
     void StartGame()
@@ -67,12 +70,18 @@ public class MainMenu : MonoBehaviour
         //Load MainScene
         SceneManager.LoadSceneAsync("MainScene");
         loadingOperation = SceneManager.LoadSceneAsync("MainScene");
+
+        //Reset Text
         welcome.text = "";
         instruction.text = "";
+
         //Triggers IEnumerator
         StartCoroutine(StartLoad());
+
         //Unload beginning scene with instructions
         SceneManager.UnloadSceneAsync("WelcomeInstructions");
+
+        //Sets off boolean values in Update()
         temp = true;
     }
 
@@ -106,5 +115,4 @@ public class MainMenu : MonoBehaviour
         }
         canvasGroup.alpha = targetValue;
     }
-
 }
