@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Code to Create Third Hallway Based of User Pressing Space
+
 public class ThirdHallway : MonoBehaviour
 {
-    int planeSize = 10;
+    //Variables For Infinite Hallway
+    /*int planeSize = 10;
+     * Vector3 startPosition;
+     * private bool wallDone = false;*/
+
     public GameObject wall;
     public GameObject player;
 
     private bool ThirdPole = false;
     private bool done = false;
     private bool left = true;
-    private bool wallDone = false;
     private bool openField;
 
-    private int number = 0;
     private int numSpace = 0;
+
     private float yrotation;
     private float playerPositionx;
     private float playerPositionz;
 
-    Vector3 startPosition;
-
     // Start is called before the first frame update
     void Start()
     {
-        //Initializing start position which is the beginning of the Third Hallway
-        startPosition = new Vector3(-58, 3, 55);
+        /*Initializing start position which is the beginning of the Third Hallway
+        startPosition = new Vector3(-58, 3, 55);*/
+
+        //Get Components from Main Script
         Main refScript = GetComponent<Main>();
         left = GetComponent<Main>().left;
         openField = GetComponent<Main>().openField;
@@ -42,18 +47,20 @@ public class ThirdHallway : MonoBehaviour
             {
                 ThirdPole = true;
                 done = false;
-                wallDone = true;
+                //wallDone = true;
             }
         }
     }
 
-
-
+    //Upon the First Space
     public void firstSpace()
     {
+        //Obtain player's rotation and position
         yrotation = transform.localEulerAngles.y;
         playerPositionx = transform.position.x;
         playerPositionz = transform.position.z;
+
+        //Create Walls Based off Rotation and Position
         if (openField == false)
         {
             Vector3 posSecond3 = new Vector3(playerPositionx+10, 3, playerPositionz+10);
@@ -69,29 +76,33 @@ public class ThirdHallway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Get left from Main Script and get info if OpenField or not from Main Script
         left = GetComponent<Main>().left;
         openField = GetComponent<Main>().openField;
+
+        //Once Collided with ThirdPole, keep track of spaces
         if (ThirdPole == true)
         {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    numSpace++;
-                }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                numSpace++;
+            }
 
-                if (numSpace == 1)
-                {
-                    firstSpace();
-                    numSpace = 2;
-                }
-                if (numSpace >= 3)
-                {
-                        if (left == false)
-                            left = true;
-                        else
-                            left = false;
-                        numSpace = 0;
-                        done = true;
-                }
+            if (numSpace == 1)
+            {
+                firstSpace();
+                numSpace = 2;
+            }
+
+            if (numSpace >= 3)
+            {
+                if (left == false)
+                    left = true;
+                else
+                    left = false;
+                numSpace = 0;
+                done = true;
+            }
         }
         
 
@@ -168,11 +179,12 @@ public class ThirdHallway : MonoBehaviour
         //When Done
         if (done == true)
         {
-            number++;
+            //Reset Boolean Values
             ThirdPole = false;
-            wallDone = false;
+            //wallDone = false;
             done = false;
-            
+
+            //Destroy Walls
             GameObject[] walls = GameObject.FindGameObjectsWithTag("wallL");
             foreach (GameObject wall in walls)
             {
