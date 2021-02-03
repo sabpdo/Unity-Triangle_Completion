@@ -48,7 +48,13 @@ public class MainMenu : MonoBehaviour
                 "\n back to your original position. Follow the instructions for the task" +
                 "\n in the upper left hand corner.";
         }
-        if (numSpace >= 2)
+        if (numSpace == 2)
+        {
+            instruction.text = "To move around in the virtual environment, press" +
+                "\n WASD, A and D to turn left and right respectively, and W and S to move forward " +
+                "\n and backward. Please also do not stray from the instructions/designated path.";
+        }
+        if (numSpace >= 3)
         {
             StartGame();
 
