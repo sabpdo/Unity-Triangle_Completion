@@ -24,6 +24,8 @@ public class TrialScript : MonoBehaviour
 
     //All Main GameObjects
     public GameObject wall;
+    public GameObject longWall;
+    public GameObject singleWall;
     public GameObject startingPole;
     public GameObject SecondPole;
     public GameObject ThirdPole;
@@ -89,7 +91,7 @@ public class TrialScript : MonoBehaviour
                 SecondPole.transform.position = new Vector3(0f, -0.5f, 49f);
             else if (TM.type == TM.obtuse2 || TM.type == TM.right2)
                 SecondPole.transform.position = new Vector3(0f, -0.5f, 69f);
-            else if (TM.current == TM.right1 || TM.current == TM.obtuse1)
+            else if (TM.type == TM.right1 || TM.type == TM.obtuse1)
                 SecondPole.transform.position = new Vector3(0f, -0.5f, 29f);
 
 
@@ -101,54 +103,22 @@ public class TrialScript : MonoBehaviour
                 instructions.text = "Walk forward in the corridor until you hear a chime " +
                     "\n and are located in a cylinder.";
 
-                //Left handed triangle
-                if (TM.left == true) 
-                {
-                    //First Hallway Right Side
-                    for (int x = 1; x <= 15; x++)
-                    {
-                        Vector3 pos = new Vector3(3, 3, (10 * x));
-                        GameObject newWall = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 0.0f, 90.0f));
-                        newWall.tag = "wall1";
-                    }
+                //First Hallway Right Side
+                Vector3 pos = new Vector3(3, 3, 10);
+                GameObject newWall = (GameObject)Instantiate(longWall, pos, Quaternion.Euler(0f, 90.0f, 0.0f));
+                newWall.tag = "wall1";
+                    
 
-                    //First Hallway Left Side
-                    for (int x = 1; x <= 15; x++)
-                    {
-                        Vector3 pos = new Vector3(-3, 3, (10 * x));
-                        GameObject newWall2 = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 180.0f, 90.0f));
-                        newWall2.tag = "wall1";
-                    }
+                Vector3 pos2 = new Vector3(-3, 3, 10);
+                GameObject newWall2 = (GameObject)Instantiate(longWall, pos2, Quaternion.Euler(0f, 90.0f, 00.0f));
+                newWall2.tag = "wall1";
+                    
 
-                    //First Hallway Back Side
-                    Vector3 pos3 = new Vector3(0, 3, 5);
-                    GameObject newBackWall = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(0.0f, 90.0f, 90.0f));
-                    newBackWall.tag = "wall1";
-                }
-                //Right handed Triangle
-                else if (TM.left == false)
-                {
-                    //First Hallway Right Side
-                    for (int x = 1; x <= 15; x++)
-                    {
-                        Vector3 pos = new Vector3(3, 3, (10 * x));
-                        GameObject newWallR = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 0.0f, 90.0f));
-                        newWallR.tag = "wall1R";
-                    }
-
-                    //First Hallway Left Side
-                    for (int x = 1; x <= 15; x++)
-                    {
-                        Vector3 pos = new Vector3(-3, 3, (10 * x));
-                        GameObject newWall2R = (GameObject)Instantiate(wall, pos, Quaternion.Euler(90.0f, 180.0f, 90.0f));
-                        newWall2R.tag = "wall1R";
-                    }
-
-                    //First Hallway Back Side
-                    Vector3 pos3 = new Vector3(0, 3, 5);
-                    GameObject newBackWallR = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(0.0f, 90.0f, 90.0f));
-                    newBackWallR.tag = "wall1R";
-                }
+                //First Hallway Back Side
+                Vector3 pos3 = new Vector3(0, 3, 5);
+                GameObject newBackWall = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0.0f, 0.0f, 0.0f));
+                newBackWall.tag = "wall1";
+                
             }
             //If Open Field
             else if (openField == true)
@@ -191,29 +161,19 @@ public class TrialScript : MonoBehaviour
                     cylinder.transform.position = new Vector3(0f, -0.5f, 49f);
                 else if (TM.type == TM.obtuse2 || TM.type == TM.right2)
                     cylinder.transform.position = new Vector3(0f, -0.5f, 69f);
-                else if (TM.current == TM.right1 || TM.current == TM.obtuse1)
+                else if (TM.type == TM.right1 || TM.type == TM.obtuse1)
                     cylinder.transform.position = new Vector3(0f, -0.5f, 29f);
 
 
                 //Destroy walls if non-Open Field
-                if (TM.left == true)
+
+                //Destroy previous hallway, second pole indicator
+                GameObject[] argo = GameObject.FindGameObjectsWithTag("wall1");
+                foreach (GameObject go in argo)
                 {
-                    //Destroy previous hallway, second pole indicator
-                    GameObject[] argo = GameObject.FindGameObjectsWithTag("wall1");
-                    foreach (GameObject go in argo)
-                    {
                         go.SetActive(false);
-                    }
                 }
-                else if (TM.left == false)
-                {
-                    //Destroy previous hallway, deactivate second pole indicator
-                    GameObject[] argo = GameObject.FindGameObjectsWithTag("wall1R");
-                    foreach (GameObject go in argo)
-                    {
-                        Destroy(go);
-                    }
-                }
+
             }
             else if (openField == true)
             {
@@ -307,48 +267,35 @@ public class TrialScript : MonoBehaviour
                             }
                             if (TM.type == TM.right1)
                             {
-                                //Create hallway
-                                for (int x = 1; x < 20; x++)
-                                {
-                                    Vector3 posSecond = new Vector3(7 + (-8 * x), 3, 33);
-                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 270f, 90f));
-                                    newWall2.tag = "wall2";
-                                }
+                                Vector3 posSecond = new Vector3(-1, 3, 33);
+                                GameObject newWall2 = (GameObject)Instantiate(longWall, posSecond, Quaternion.Euler(0f, 0f, 0f));
+                                newWall2.tag = "wall2";
 
-                                for (int x = 1; x < 20; x++)
-                                {
-                                    Vector3 posSecond2 = new Vector3(7 + (-8 * x), 3, 25);
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 270f, 90f));
-                                    newWall2R.tag = "wall2";
-                                }
-
+                                Vector3 posSecond2 = new Vector3(-1, 3, 25);
+                                GameObject newWall2R = (GameObject)Instantiate(longWall, posSecond2, Quaternion.Euler(0f, 0f, 0f));
+                                newWall2R.tag = "wall2";
+                                
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 29);
-                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 0f, 90f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 90f, 00f));
                                 newBackWall2.tag = "wall2";
                             }
                             else if (TM.type == TM.right2)
                             {
-                                //Create hallway
-                                for (int x = 1; x < 20; x++)
-                                {
-                                    Vector3 posSecond = new Vector3(7 + (-8 * x), 3, 65);
-                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 270f, 90f));
-                                    newWall2.tag = "wall2";
-                                }
 
-                                for (int x = 1; x < 20; x++)
-                                {
-                                    Vector3 posSecond2 = new Vector3(7 + (-8 * x), 3, 73);
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 270f, 90f));
-                                    newWall2R.tag = "wall2";
-                                }
+                                Vector3 posSecond = new Vector3(-1, 3, 65);
+                                GameObject newWall2 = (GameObject)Instantiate(longWall, posSecond, Quaternion.Euler(0f, 0f, 0f));
+                                newWall2.tag = "wall2";
+
+                                Vector3 posSecond2 = new Vector3(-1, 3, 73);
+                                GameObject newWall2R = (GameObject)Instantiate(longWall, posSecond2, Quaternion.Euler(0f, 0f, 0f));
+                                newWall2R.tag = "wall2";
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 69);
-                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 180f, 90f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 90f, 00f));
                                 newBackWall2.tag = "wall2";
-            
+                                
                             }
                         }
                         else if (TM.openField == true)
@@ -522,25 +469,19 @@ public class TrialScript : MonoBehaviour
 
                             if (TM.type == TM.right1)
                             {
-                                //Create hallway
-                                for (int x = 1; x < 20; x++)
-                                {
-                                    Vector3 posSecond = new Vector3(-8 + (8 * x), 3, 33);
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 90f, 90f));
-                                    newWall2R.tag = "wall2R";
-                                }
+                                Vector3 posSecond = new Vector3(-1, 3, 33);
+                                GameObject newWall2 = (GameObject)Instantiate(longWall, posSecond, Quaternion.Euler(0f, 180f, 0f));
+                                newWall2.tag = "wall2R";
 
-                                for (int x = 1; x < 20; x++)
-                                {
-                                    Vector3 posSecond2 = new Vector3(-8 + (8 * x), 3, 25);
-                                    GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 90f, 90f));
-                                    newWall2RR.tag = "wall2R";
-                                }
+                                Vector3 posSecond2 = new Vector3(-1, 3, 25);
+                                GameObject newWall2R = (GameObject)Instantiate(longWall, posSecond2, Quaternion.Euler(0f, 180f, 0f));
+                                newWall2R.tag = "wall2R";
 
                                 //Create back wall
-                                Vector3 pos3 = new Vector3(-3, 3, 29);
-                                GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 0f, 90f));
-                                newBackWall2R.tag = "wall2R";
+                                Vector3 pos3 = new Vector3(3, 3, 29);
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 90f, 0f));
+                                newBackWall2.tag = "wall2R";
+
                                 source.Stop();
                             }
                             else if (TM.type == TM.right2)
