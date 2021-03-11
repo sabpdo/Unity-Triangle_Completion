@@ -63,18 +63,35 @@ public class ThirdHallway : MonoBehaviour
         yrotation = transform.localEulerAngles.y;
         playerPositionx = transform.position.x;
         playerPositionz = transform.position.z;
-        
 
+        float wallrotation = yrotation + 90;
         //Create Walls Based off Rotation and Position
         if (openField == false)
         {
-            Vector3 posSecond3 = new Vector3(playerPositionx+10, 3, playerPositionz+10);
-            GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation, 90f));
-            newWallL2.tag = "wallL";
-
-            Vector3 posSecond = new Vector3(playerPositionx - 7, 3, playerPositionz- 10);
-            GameObject newWallL = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, yrotation, 90f));
-            newWallL.tag = "wallL";
+            if (wallrotation >= 0 || wallrotation <= 90)
+            {
+                Vector3 posSecond3 = new Vector3(playerPositionx - 5, 3, playerPositionz - 5);
+                GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
+                newWallL2.tag = "wallL";
+            }
+            else if (wallrotation >=90 || wallrotation<=180)
+            {
+                Vector3 posSecond3 = new Vector3(playerPositionx + 5, 3, playerPositionz + 5);
+                GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
+                newWallL2.tag = "wallL";
+            }
+            else if (wallrotation >= 180 || wallrotation <= 270)
+            {
+                Vector3 posSecond3 = new Vector3(playerPositionx + 5, 3, playerPositionz + 10);
+                GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
+                newWallL2.tag = "wallL";
+            }
+            else
+            {
+                Vector3 posSecond3 = new Vector3(playerPositionx + 10, 3, playerPositionz + 5);
+                GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
+                newWallL2.tag = "wallL";
+            }
         }
         wallSpawned = false;
     }
