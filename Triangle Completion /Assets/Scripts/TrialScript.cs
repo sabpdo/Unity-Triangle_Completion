@@ -478,7 +478,7 @@ public class TrialScript : MonoBehaviour
                                 newWall2R.tag = "wall2R";
 
                                 //Create back wall
-                                Vector3 pos3 = new Vector3(3, 3, 29);
+                                Vector3 pos3 = new Vector3(-6, 3, 29);
                                 GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 90f, 0f));
                                 newBackWall2.tag = "wall2R";
 
