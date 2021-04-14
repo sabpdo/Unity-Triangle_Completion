@@ -68,21 +68,22 @@ public class ThirdHallway : MonoBehaviour
         //Create Walls Based off Rotation and Position
         if (openField == false)
         {
-            if (wallrotation >= 0 || wallrotation <= 90)
+            
+            if (yrotation >= 0 || yrotation <= 90)
             {
                 Vector3 posSecond3 = new Vector3(playerPositionx - 5, 3, playerPositionz - 5);
                 GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
                 newWallL2.tag = "wallL";
             }
-            else if (wallrotation >=90 || wallrotation<=180)
+            else if (yrotation >=90 || yrotation<=180)
             {
-                Vector3 posSecond3 = new Vector3(playerPositionx + 5, 3, playerPositionz + 5);
+                Vector3 posSecond3 = new Vector3(playerPositionx + 40, 3, playerPositionz + 40);
                 GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
                 newWallL2.tag = "wallL";
             }
-            else if (wallrotation >= 180 || wallrotation <= 270)
+            else if (yrotation >= 180 || yrotation <= 270)
             {
-                Vector3 posSecond3 = new Vector3(playerPositionx + 5, 3, playerPositionz + 10);
+                Vector3 posSecond3 = new Vector3(playerPositionx + 5, 3, playerPositionz + 5);
                 GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
                 newWallL2.tag = "wallL";
             }
@@ -92,6 +93,7 @@ public class ThirdHallway : MonoBehaviour
                 GameObject newWallL2 = (GameObject)Instantiate(wall, posSecond3, Quaternion.Euler(0f, yrotation + 90, 0f));
                 newWallL2.tag = "wallL";
             }
+            
         }
         wallSpawned = false;
     }
