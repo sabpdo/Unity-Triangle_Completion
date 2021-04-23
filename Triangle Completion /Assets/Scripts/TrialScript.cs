@@ -40,16 +40,21 @@ public class TrialScript : MonoBehaviour
 
     //Audio import
     private AudioSource source;
-    public AudioClip sound;
+    public AudioClip rightTurn;
+    public AudioClip leftTurn;
+
 
     public bool trialStart = false;
 
     private bool left;
 
+    private bool practice = TrialManager.practice;
+
     
     // Start is called before the first frame update
     void Start()
     {
+        
         //Initialize Audio
         source = GetComponent<AudioSource>();
         source.Stop();
@@ -64,10 +69,11 @@ public class TrialScript : MonoBehaviour
         openFieldPole.SetActive(false);
         secondOpenFieldPole.SetActive(false);
 
+        if (practice)
         //Instructions
-        instructions.text = "Please walk forward.";
+            instructions.text = "Please walk forward.";
 
-
+        practice = TrialManager.practice;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -99,9 +105,12 @@ public class TrialScript : MonoBehaviour
             if (openField == false)
             {
                 trialStart = true;
-                //Instructions
-                instructions.text = "Walk forward in the corridor until you hear a chime " +
-                    "\n and are located in a cylinder.";
+                if (practice)
+                {
+                    //Instructions
+                    instructions.text = "Walk forward in the corridor until you hear a chime " +
+                       "\n and are located in a cylinder.";
+                }
 
                 //First Hallway Right Side
                 Vector3 pos = new Vector3(3, 3, 10);
@@ -124,7 +133,8 @@ public class TrialScript : MonoBehaviour
             else if (openField == true)
             {
                 openFieldPole.SetActive(true);
-                instructions.text = "Walk forward until you hear a chime.";
+                if (practice)
+                    instructions.text = "Walk forward until you hear a chime.";
             }
         }
 
@@ -134,11 +144,18 @@ public class TrialScript : MonoBehaviour
             //Set Off Boolean Value in Update
             firstCylinder = true;
 
-            //Instructions
-            instructions.text = "First Leg Completed. Please turn until you hear a second chime.";
+            if (practice)
+            {
+                //Instructions
+                instructions.text = "First Leg Completed. Please turn until you hear a second chime.";
+            }
 
             //Sound
-            source.PlayOneShot(sound, 1.0f);
+            if (TM.left == true)
+                source.PlayOneShot(leftTurn, 1.0f);
+            else
+                source.PlayOneShot(rightTurn, 1.0f);
+
 
             //Deactivate SecondPole
             SecondPole.SetActive(false);
@@ -190,16 +207,22 @@ public class TrialScript : MonoBehaviour
             ThirdPole.SetActive(false);
 
             //Sound
-            source.PlayOneShot(sound, 1.0f);
-            
+            if (TM.left == true)
+                source.PlayOneShot(leftTurn, 1.0f);
+            else
+                source.PlayOneShot(rightTurn, 1.0f);
+
             if (openField == false)
             {
-                //instructions
-                instructions.text = "Second Leg Completed. Please turn until you believe you " +
-                    "\n are facing the correct direction of where you started. When you are at the " +
-                    "\n desired turn angle, press space once and another hallway will appear. " +
-                    "\n Travel down the hallway and press space once when you believe you are " +
-                    "\n at the starting location.";
+                if (practice)
+                {
+                    //instructions
+                    instructions.text = "Second Leg Completed. Please turn until you believe you " +
+                        "\n are facing the correct direction of where you started. When you are at the " +
+                        "\n desired turn angle, press space once and another hallway will appear. " +
+                        "\n Travel down the hallway and press space once when you believe you are " +
+                        "\n at the starting location.";
+                }
 
                 //Second Cylinder boolean value for update
                 secondCylinder = true;
@@ -227,8 +250,11 @@ public class TrialScript : MonoBehaviour
                 //Boolean Value to Set Off Code in Update
                 thirdLegOpen = true;
                 //Instructions
-                instructions.text = "Second Leg Completed. Please return to where you believe you started. " +
-                    "\nWhen you think you have reached your initial position, please press space once.";
+                if (practice)
+                {
+                    instructions.text = "Second Leg Completed. Please return to where you believe you started. " +
+                        "\nWhen you think you have reached your initial position, please press space once.";
+                }
                 //Deactivate SecondOpenFieldPole
                 secondOpenFieldPole.SetActive(false);
             }
@@ -248,11 +274,14 @@ public class TrialScript : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y < 273 && transform.localEulerAngles.y > 267)
                     {
-                        //Instructions
-                        instructions.text = "Walk forward until you hear a chime. ";
+                        if (practice)
+                        {
+                            //Instructions
+                            instructions.text = "Walk forward until you hear a chime. ";
+                        }
 
                         //Sound
-                        source.PlayOneShot(sound, 1.0f);
+                        source.PlayOneShot(leftTurn, 1.0f);
 
                         //Reset boolean value
                         firstCylinder = false;
@@ -311,8 +340,12 @@ public class TrialScript : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y < 243 && transform.localEulerAngles.y > 237)
                     {
-                        instructions.text = "Walk forward until you hear a chime. ";
-                        source.PlayOneShot(sound, 1.0f);
+                        source.PlayOneShot(leftTurn, 1.0f);
+                        if (practice)
+                        {
+                            instructions.text = "Walk forward until you hear a chime. ";
+                        }
+                       
                         firstCylinder = false;
 
                         if (openField == false)
@@ -376,8 +409,12 @@ public class TrialScript : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y < 303 && transform.localEulerAngles.y > 297)
                     {
-                        instructions.text = "Walk forward until you hear a chime. ";
-                        source.PlayOneShot(sound, 1.0f);
+                        source.PlayOneShot(leftTurn, 1.0f);
+                        if (practice)
+                        {
+                            instructions.text = "Walk forward until you hear a chime. ";
+                        }
+                        
                         firstCylinder = false;
 
                         if (TM.openField == false)
@@ -411,7 +448,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(3, 3, 29);
                                 GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 210f, 90f));
                                 newBackWall2.tag = "wall2";
-                                source.Stop();
+                                
                             }
                             else if (TM.type == TM.obtuse2)
                             {
@@ -434,7 +471,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(3, 3, 69);
                                 GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 210f, 90f));
                                 newBackWall2.tag = "wall2";
-                                source.Stop();
+                                
                             }
                         }
                         else if (TM.openField == true)
@@ -454,8 +491,11 @@ public class TrialScript : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y > 87 && transform.localEulerAngles.y < 93)
                     {
-                        instructions.text = "Walk forward until you hear a chime. ";
-                        source.PlayOneShot(sound, 1.0f);
+                        if (practice)
+                        {
+                            instructions.text = "Walk forward until you hear a chime. ";
+                        }
+                        source.PlayOneShot(rightTurn, 1.0f);
                         firstCylinder = false;
 
                         if (openField == false)
@@ -482,7 +522,7 @@ public class TrialScript : MonoBehaviour
                                 GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 90f, 0f));
                                 newBackWall2.tag = "wall2R";
 
-                                source.Stop();
+                                
                             }
                             else if (TM.type == TM.right2)
                             {
@@ -505,7 +545,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(-3, 3, 69);
                                 GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 0f, 90f));
                                 newBackWall2R.tag = "wall2R";
-                                source.Stop();
+                                
                             }
                         }
                         else if (TM.openField == true)
@@ -519,8 +559,11 @@ public class TrialScript : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y > 117 && transform.localEulerAngles.y < 123)
                     {
-                        instructions.text = "Walk forward until you hear a chime. ";
-                        source.PlayOneShot(sound, 1.0f);
+                        if (practice)
+                        {
+                            instructions.text = "Walk forward until you hear a chime. ";
+                        }
+                        source.PlayOneShot(rightTurn, 1.0f);
                         firstCylinder = false;
 
                         if (openField == false)
@@ -553,7 +596,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(-3, 3, 49);
                                 GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 30f, 90f));
                                 newBackWall2R.tag = "wall2R";
-                                source.Stop();
+                                
                             }
                             else if (TM.type == TM.acute2)
                             {
@@ -576,7 +619,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(-3, 3, 49);
                                 GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 30f, 90f));
                                 newBackWall2R.tag = "wall2R";
-                                source.Stop();
+                                
                             }
                         }
                         else if (openField == true)
@@ -590,8 +633,11 @@ public class TrialScript : MonoBehaviour
                 {
                     if (transform.localEulerAngles.y > 57 && transform.localEulerAngles.y < 63) 
                     {
-                        instructions.text = "Walk forward until you hear a chime. ";
-                        source.PlayOneShot(sound, 1.0f);
+                        if (practice)
+                        {
+                            instructions.text = "Walk forward until you hear a chime. ";
+                        }
+                        source.PlayOneShot(rightTurn, 1.0f);
                         firstCylinder = false;
 
                         if (openField == false)
@@ -624,7 +670,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(-3, 3, 29);
                                 GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, -30f, 90f));
                                 newBackWall2R.tag = "wall2R";
-                                source.Stop();
+                                
                             }
                             else if (TM.type == TM.obtuse2)
                             {
@@ -647,7 +693,7 @@ public class TrialScript : MonoBehaviour
                                 Vector3 pos3 = new Vector3(-4, 3, 69);
                                 GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, -30f, 90f));
                                 newBackWall2R.tag = "wall2R";
-                                source.Stop();
+                                
                             }
                         }
                         else if (TM.openField == true)
@@ -676,7 +722,10 @@ public class TrialScript : MonoBehaviour
                 source.Stop();
                 numSpace = 0;
                 trialStart = false;
-                instructions.text = "Please walk back to the starting pole. ";
+                if (practice)
+                {
+                    instructions.text = "Please walk back to the starting pole. ";
+                }
             }
         }
 
@@ -695,8 +744,11 @@ public class TrialScript : MonoBehaviour
 
                 startingPole.SetActive(true);
 
-                //Instructions
-                instructions.text = "Please walk back to the starting cone.";
+                if (practice)
+                {
+                    //Instructions
+                    instructions.text = "Please walk back to the starting cone.";
+                }
 
 
                 trialStart = false;
