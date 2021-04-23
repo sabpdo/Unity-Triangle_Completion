@@ -10,6 +10,7 @@ public class TrialManager : MonoBehaviour
 
     public static int trialnum = 1;
     public static bool trialStart;
+    public static bool practice = false;
     public int trialMax = 48;
     public DataManager DM;
 
@@ -124,6 +125,11 @@ public class TrialManager : MonoBehaviour
         GameObject player = GameObject.Find("Camera View");
         TrialScript TS = player.GetComponent<TrialScript>();
         trialStart = TS.trialStart;
+
+        if (trialnum <= 6)
+            practice = true;
+        else
+            practice = false;
 
         //For Data Manager
         if (current == right)
