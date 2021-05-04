@@ -1293,8 +1293,8 @@ MonoBehaviour:
   cylinder: {fileID: 380569551754790368, guid: 404691d0e99754fe48f80badd8b9fb55, type: 3}
   openFieldPole: {fileID: 328505436}
   secondOpenFieldPole: {fileID: 1240362837}
-  rightTurn: {fileID: 0}
-  leftTurn: {fileID: 0}
+  rightTurn: {fileID: 8300000, guid: e3b4fa9655e10485cba2833d234c5d84, type: 3}
+  leftTurn: {fileID: 8300000, guid: ff0fa4b74551f408b8f4c77638198bbf, type: 3}
   trialStart: 0
 --- !u!114 &1866324775
 MonoBehaviour:
@@ -1325,7 +1325,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ff0fa4b74551f408b8f4c77638198bbf, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trialMax: 48
-  DM: {fileID: 0}
+  DM: {fileID: 397502825}
   right: 1
   right1: 105
   right2: 106
@@ -1456,7 +1456,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e3b4fa9655e10485cba2833d234c5d84, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
