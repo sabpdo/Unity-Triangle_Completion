@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using UnityEngine.UI;
@@ -20,22 +21,29 @@ public class DataManager : MonoBehaviour
 
     private static bool wallSpawned;
     public float angle;
+    public float tdrAngle = 0f;
+    public float totalDistanceTraveled = 0f;
 
     public GameObject player;
 
     public Vector3 playerPos;
     public Vector3 playerRot;
-    public Vector3 lastPosition = Vector3.zero;
-    public Vector3 lastRotation, lastAngle, playerRotAngle;
-
 
     public GameObject ThirdPole;
+    public GameObject SecondPole;
     public GameObject startingPole;
+
+    public Vector3 lastPosition = Vector3.zero;
+    public Vector3 homeLocation;
+    public Vector3 lastRotation, lastAngle, playerRotAngle;
+    public Vector3 startingPosition;
+
 
     public string responseData = "";
     public string trialData = "";
     public static string positionData = "";
-    public string FILE_NAME;
+    public string FILE_NAME = "test";
+    string OBJ_FILE_NAME = "test";
 
     public static bool GameStart = false;
     public bool responseAcquired = false;
@@ -58,8 +66,13 @@ public class DataManager : MonoBehaviour
         wallSpawned = TH.wallSpawned;
         done = TH.done;
 
+        // Call the CollectPositionData() Method Once every 1/10th of a second (10Hz)
+        InvokeRepeating("CollectPositionData", 0f, 0.1f);
+
         //Make sure the triangle type matches the other script
         typeTriangle = TM.typeTriangle;
+
+        startingPosition = startingPole.transform.position;
     }
 
     // Update is called once per frame
@@ -69,6 +82,7 @@ public class DataManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && wallSpawned)
         {
             recordData();
+            CollectResponseData();
         }
 
         //Write to file the data when the trial is done
@@ -85,6 +99,18 @@ public class DataManager : MonoBehaviour
         playerPos = player.transform.position;
         playerRot = player.transform.eulerAngles;
         playerRotAngle = player.transform.forward;
+
+        float angleTrav = Vector3.Angle(playerRotAngle, lastAngle);
+        tdrAngle += angleTrav;
+
+
+        float distTrav = Vector3.Distance(playerPos, lastPosition);
+        totalDistanceTraveled += distTrav;
+
+
+        // Update last position and rotation to current rotation for use within the next update
+        lastPosition = playerPos;
+        lastAngle = playerRotAngle;
 
 
         //Setting the respective correct angle 
@@ -130,6 +156,7 @@ public class DataManager : MonoBehaviour
     public void recordData()
     { 
         inputAngle = GetInputAngle();
+
     }
 
     public float GetInputAngle()
@@ -184,6 +211,9 @@ public class DataManager : MonoBehaviour
         angularError = Mathf.DeltaAngle((inputAngle), (correctAngle));
         pctAngular180Error = Mathf.Abs(angularError / 180);
         float inputAngleEulerClockwise = (360 - inputAngle);
+        Vector3 StartingPoleLocation = startingPole.transform.position;
+        Vector3 SecondPoleLocation = SecondPole.transform.position;
+        Vector3 ThirdPoleLocation = ThirdPole.transform.position;
         
         
         string tdata = TrialManager.trialnum.ToString() + ", "
@@ -194,6 +224,9 @@ public class DataManager : MonoBehaviour
             + inputAngle.ToString() + ", "
             + angularError.ToString() + ", "
             + pctAngular180Error.ToString() + ", "
+            + StartingPoleLocation.ToString() + ","
+            + SecondPoleLocation.ToString() + ","
+            + ThirdPoleLocation.ToString() + ","
             ;
 
         return tdata;
@@ -207,7 +240,8 @@ public class DataManager : MonoBehaviour
         StreamWriter sw = File.AppendText(filePath);
         if (new FileInfo(FILE_NAME).Length == 0)
         {
-            sw.WriteLine("trialNum, triangleType, correctDistance, inputDistance, correctAngle, inputAngle, angularError, pctAngular180Error");
+            sw.WriteLine("trialNum, triangleType, correctDistance, inputDistance, correctAngle, inputAngle, angularError, pctAngular180Error," +
+                "StartingLocation, FirstCornerLocation, SecondCornerLocation");
         }
 
         sw.WriteLine(trialData);
@@ -219,6 +253,45 @@ public class DataManager : MonoBehaviour
     {
         return Application.dataPath + "CSV/" + "Saved_data.csv";
     }
+
+
+    void sendPosTexttoFile()
+    {
+        // Hard write to folder
+        StreamWriter sw = File.AppendText(FILE_NAME);
+        if (new FileInfo(OBJ_FILE_NAME).Length == 0)
+        {
+            sw.WriteLine("pos_x, pos_z, rot_y, run_time, trial_level, delta_target, " +
+                "delta_start, tot_dist, tot_rot_y");
+        }
+        sw.WriteLine(positionData);
+        sw.Close();
+
+    }
+
+    void CollectPositionData()
+    {
+
+        // Every 10 Hz after start, grab Variables
+        // Distance from player to target object, and distance from player spawn to current player location
+        
+        float deltaTarget = Vector3.Distance(ThirdPole.transform.position, player.transform.position);
+        float deltaStart = Vector3.Distance(startingPole.transform.position, player.transform.position);
+
+        positionData += playerPos.x + "," + playerPos.z + "," +
+            playerRot.y + "," +
+            Time.time + "," +
+            SceneManager.GetActiveScene().name + "," +
+            deltaTarget + "," + deltaStart + "," +
+            totalDistanceTraveled + "," +
+            tdrAngle + ",\n";
+    }
+
+    void CollectResponseData()
+    {
+        sendPosTexttoFile();
+    }
+
 
 }
 
