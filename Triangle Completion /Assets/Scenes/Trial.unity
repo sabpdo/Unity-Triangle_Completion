@@ -239,15 +239,20 @@ MonoBehaviour:
   correctAngle: 0
   correctDistance: 0
   angle: 0
+  tdrAngle: 0
+  totalDistanceTraveled: 0
   player: {fileID: 1866324769}
   playerPos: {x: 0, y: 0, z: 0}
   playerRot: {x: 0, y: 0, z: 0}
+  ThirdPole: {fileID: 1908688549}
+  SecondPole: {fileID: 108536515}
+  startingPole: {fileID: 867305418}
   lastPosition: {x: 0, y: 0, z: 0}
+  homeLocation: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0}
   lastAngle: {x: 0, y: 0, z: 0}
   playerRotAngle: {x: 0, y: 0, z: 0}
-  ThirdPole: {fileID: 1908688549}
-  startingPole: {fileID: 867305418}
+  startingPosition: {x: 0, y: 0, z: 0}
   responseData: 
   trialData: 
   FILE_NAME: 
