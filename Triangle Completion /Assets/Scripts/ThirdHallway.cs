@@ -16,6 +16,7 @@ public class ThirdHallway : MonoBehaviour
 
     private bool ThirdPole = false;
     public bool done = false;
+    public bool done2 = false;
     private bool left = true;
     private bool openField;
     public bool wallSpawned = false;
@@ -51,6 +52,7 @@ public class ThirdHallway : MonoBehaviour
             {
                 ThirdPole = true;
                 done = false;
+                done2 = false;
                 //wallDone = true;
             }
         }
@@ -131,6 +133,7 @@ public class ThirdHallway : MonoBehaviour
                     left = false;
                 numSpace = 0;
                 done = true;
+                done2 = true;
             }
         }
         
@@ -141,7 +144,7 @@ public class ThirdHallway : MonoBehaviour
             //Reset Boolean Values
             ThirdPole = false;
             //wallDone = false;
-            done = false;
+            
 
             //Destroy Walls
             GameObject[] walls = GameObject.FindGameObjectsWithTag("wallL");
@@ -149,7 +152,7 @@ public class ThirdHallway : MonoBehaviour
             {
                 Destroy(wall);
             }
-                
+            done = false;
         }
     }
         
