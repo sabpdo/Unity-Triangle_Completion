@@ -50,7 +50,8 @@ public class TrialScript : MonoBehaviour
 
     private bool practice = TrialManager.practice;
 
-    
+    public bool collisionFirst = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +86,8 @@ public class TrialScript : MonoBehaviour
         if (collision.gameObject.CompareTag("StartPole"))
         {
             trialStart = true;
+            collisionFirst = true;
+
             //Moving player to original position
             transform.position = new Vector3(0f, 0f, 9f);
 
@@ -101,10 +104,9 @@ public class TrialScript : MonoBehaviour
                 SecondPole.transform.position = new Vector3(0f, -0.5f, 29f);
 
 
-            //If Open Field
+            //If Not Open Field
             if (openField == false)
             {
-                trialStart = true;
                 if (practice)
                 {
                     //Instructions
@@ -141,6 +143,7 @@ public class TrialScript : MonoBehaviour
         //Upon Collision of Second Pole
         if (collision.gameObject.CompareTag("SecondPole"))
         {
+            collisionFirst = false;
             //Set Off Boolean Value in Update
             firstCylinder = true;
 
