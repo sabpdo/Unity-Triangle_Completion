@@ -45,6 +45,8 @@ public class TrialManager : MonoBehaviour
     private int ObtuseNumber = 0;
 
     public bool openField;
+    public bool practiceViewed = false;
+    public bool practiceDone = false;
 
     public int current;
     public int type;
@@ -64,6 +66,7 @@ public class TrialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        practice = true;
         ThirdHallway refScript = GetComponent<ThirdHallway>();
         
         Debug.Log("TRIAL SCENE LOADED: " + trialnum);
@@ -124,12 +127,21 @@ public class TrialManager : MonoBehaviour
     {
         GameObject player = GameObject.Find("Camera View");
         TrialScript TS = player.GetComponent<TrialScript>();
+        ThirdHallway TH = player.GetComponent<ThirdHallway>();
         trialStart = TS.trialStart;
 
+
+
         if (trialnum <= 6)
+        {
             practice = true;
+            Debug.Log("Current Trial loaded: Practice " + trialnum);
+        }
         else
+        {
             practice = false;
+            Debug.Log("Current Trial loaded: " + trialnum);
+        }
 
         //For Data Manager
         if (current == right)
@@ -154,6 +166,21 @@ public class TrialManager : MonoBehaviour
             else if (type == obtuse2)
                 typeTriangle = "Obtuse Triangle(120) - Length 6,4";
         }
+
+        NextTrial();
+
+        if (TH.done2 == true)
+        {
+            trialnum++;
+            TH.done2 = false;
+            ResetTrial();
+            
+        }
+
+        if (trialnum==7 && TS.collisionFirst==true)
+        {
+            practiceDone = true;
+        }
     }
 
 
@@ -161,16 +188,148 @@ public class TrialManager : MonoBehaviour
     {
         GameObject player = GameObject.Find("Camera View");
         ThirdHallway TH = player.GetComponent<ThirdHallway>();
+        TrialScript TS = player.GetComponent<TrialScript>();
 
         if (trialnum == trialMax + 1)
         {
             SceneManager.LoadScene("Complete");
         }
+        else if (trialnum<=6)
+        {
+            Debug.Log("Current Trial loaded: Practice " + trialnum);
 
-        else if (trialnum<trialMax)
+            //Moving Third Pole Marker Around
+            //Right Handed Triangle - Code to Situate ThirdPole+SecondOpenFieldPole properly
+            if (left == false)
+            {
+                if (current == right)
+                {
+                    if (type == right1)
+                    {
+                        thirdPoleLocation = new Vector3(60f, 0f, 29f);
+                        thirdOpenPoleLocation = new Vector3(100f, 3f, 29f);
+                    }
+                    else if (type == right2)
+                    {
+                        thirdPoleLocation = new Vector3(40f, 0f, 69f);
+                        thirdOpenPoleLocation = new Vector3(100f, 3f, 69f);
+                    }
+                }
+                else if (current == acute)
+                {
+                    if (type == acute1)
+                    {
+                        thirdPoleLocation = new Vector3(17.32f, 0f, 39f);
+                        thirdOpenPoleLocation = new Vector3(86.6f, 3f, -1f);
+                    }
+                    else if (type == acute2)
+                    {
+                        thirdPoleLocation = new Vector3(51.96f, 0f, 19f);
+                        thirdOpenPoleLocation = new Vector3(86.6f, 3f, -1f);
+                    }
+                }
+                else if (current == obtuse)
+                {
+                    if (type == obtuse1)
+                    {
+                        thirdPoleLocation = new Vector3(20 * Mathf.Sqrt(3), 0f, 49f);
+                        thirdOpenPoleLocation = new Vector3(86.6f, 3f, 83f);
+                    }
+                    else if (type == obtuse2)
+                    {
+                        thirdPoleLocation = new Vector3(10 * Mathf.Sqrt(3), 0f, 79f);
+                        thirdOpenPoleLocation = new Vector3(86.6f, 3f, 123f);
+                    }
+                }
+            }
+            //Left Handed Triangle
+            else if (left == true)
+            {
+                if (current == right)
+                {
+                    if (type == right1)
+                    {
+                        thirdPoleLocation = new Vector3(-60f, 0f, 29f);
+                        thirdOpenPoleLocation = new Vector3(-100f, 3f, 29f);
+                    }
+                    else if (type == right2)
+                    {
+                        thirdPoleLocation = new Vector3(-40f, 0f, 69f);
+                        thirdOpenPoleLocation = new Vector3(-100f, 3f, 29f);
+                    }
+                }
+                else if (current == acute)
+                {
+                    if (type == acute1)
+                    {
+                        thirdPoleLocation = new Vector3(-17.32f, 0f, 39f);
+                        thirdOpenPoleLocation = new Vector3(-86.6f, 3f, -1f);
+                    }
+                    else if (type == acute2)
+                    {
+                        thirdPoleLocation = new Vector3(-51.96f, 0f, 19f);
+                        thirdOpenPoleLocation = new Vector3(-86.6f, 3f, -1f);
+                    }
+                }
+                else if (current == obtuse)
+                {
+                    if (type == obtuse1)
+                    {
+                        thirdPoleLocation = new Vector3(-20 * Mathf.Sqrt(3), 0f, 49f);
+                        thirdOpenPoleLocation = new Vector3(-86.6f, 3f, 83f);
+                    }
+                    else if (type == obtuse2)
+                    {
+                        thirdPoleLocation = new Vector3(-10 * Mathf.Sqrt(3), 0f, 79f);
+                        thirdOpenPoleLocation = new Vector3(-86.6f, 3f, 123f);
+                    }
+                }
+            }
+
+
+            //To Keep Track of How Many of Each Trial Completed, Taking Account of Hand, Triangle, and Type
+            if (current == right && left == false && type == right1)
+                rightRightNumber1++;
+            else if (current == right && left == true && type == right1)
+                leftRightNumber1++;
+            else if (current == right && left == false && type == right2)
+                rightRightNumber2++;
+            else if (current == right && left == true && type == right2)
+                leftRightNumber2++;
+            else if (current == acute && left == false && type == acute1)
+                rightAcuteNumber1++;
+            else if (current == acute && left == true && type == acute1)
+                leftAcuteNumber1++;
+            else if (current == acute && left == false && type == acute2)
+                rightAcuteNumber2++;
+            else if (current == acute && left == true && type == acute2)
+                leftAcuteNumber2++;
+            else if (current == obtuse && left == false && type == obtuse1)
+                rightObtuseNumber1++;
+            else if (current == obtuse && left == true && type == obtuse1)
+                leftObtuseNumber1++;
+            else if (current == obtuse && left == false && type == obtuse2)
+                rightObtuseNumber2++;
+            else if (current == obtuse && left == true && type == obtuse2)
+                leftObtuseNumber2++;
+
+
+            //Overall counter for Triangle
+            if (current == right)
+                RightNumber++;
+            else if (current == obtuse)
+                ObtuseNumber++;
+            else if (current == acute)
+                AcuteNumber++;
+
+
+
+            
+        }
+        else if (trialnum<=trialMax)
         {
             
-            Debug.Log("Current Trial loaded: " + trialnum);
+            Debug.Log("Current Trial loaded: " + (trialnum-6));
             
            
             //Moving Third Pole Marker Around
@@ -295,15 +454,8 @@ public class TrialManager : MonoBehaviour
             else if (current == obtuse)
                 ObtuseNumber++;
             else if (current == acute)
-                AcuteNumber++;     
+                AcuteNumber++;
 
-
-            if(TH.done)
-            {
-                ResetTrial();
-                trialnum += 1;
-                NextTrial();
-            }
         }
 
     }
