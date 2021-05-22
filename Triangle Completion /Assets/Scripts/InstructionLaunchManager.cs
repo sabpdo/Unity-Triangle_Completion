@@ -56,16 +56,15 @@ public class InstructionLaunchManager : MonoBehaviour
         }
         else if (numSpace==3)
         {
-            StartGame();
-        }
-        /*
-        else if (section == "Practice")
-        {
             instruction.text = "Now you will do six practice trials. When each trial appears, follow the instructions"
                 + "\n in the top left corner. Press SPACE BAR to see the first practice trial.";
-            practiceViewed = true;
+        }
+        else if (numSpace==4)
+        {
+            StartGame();
         }
         
+        /*
         else (section == "Test")
         {
             instruction.text = "Now you will do the test. When each trial appears, follow the instructions"
