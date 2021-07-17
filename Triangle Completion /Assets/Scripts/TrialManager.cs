@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TrialManager : MonoBehaviour
+public class TrialManager: MonoBehaviour
 {
 
     public static int trialnum = 1;
@@ -17,10 +17,10 @@ public class TrialManager : MonoBehaviour
     public int right = 1; //for right triangle
     public int right1 = 105; //2,6,90
     public int right2 = 106; //6,4,90
-    public int leftRightNumber1 = 0;
-    public int leftRightNumber2 = 0;
-    public int rightRightNumber1 = 0;
-    public int rightRightNumber2 = 0;
+    private int leftRightNumber1 = 0;
+    private int leftRightNumber2 = 0;
+    private int rightRightNumber1 = 0;
+    private int rightRightNumber2 = 0;
 
     public int RightNumber = 0;
 
@@ -125,7 +125,7 @@ public class TrialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         TrialScript TS = player.GetComponent<TrialScript>();
         ThirdHallway TH = player.GetComponent<ThirdHallway>();
         trialStart = TS.trialStart;
@@ -186,7 +186,7 @@ public class TrialManager : MonoBehaviour
 
     public void NextTrial()
     {
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         ThirdHallway TH = player.GetComponent<ThirdHallway>();
         TrialScript TS = player.GetComponent<TrialScript>();
 
