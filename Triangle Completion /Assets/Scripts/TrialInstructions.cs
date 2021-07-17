@@ -23,7 +23,7 @@ public class TrialInstructions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         TrialManager TM = player.GetComponent<TrialManager>();
         //To make slider accord to how much of the scene has loaded
         if (Input.GetKeyDown(KeyCode.Space) && TM.practiceDone)
