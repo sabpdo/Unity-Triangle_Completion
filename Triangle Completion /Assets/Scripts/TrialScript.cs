@@ -79,7 +79,7 @@ public class TrialScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         TrialManager trialManager = player.GetComponent<TrialManager>();
         TrialManager TM = trialManager;
         //Upon the collision of the First Pole
@@ -266,7 +266,7 @@ public class TrialScript : MonoBehaviour
 
     private void Update()
     {
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         TrialManager TM = player.GetComponent<TrialManager>();
 
         if (TM.left == true)
