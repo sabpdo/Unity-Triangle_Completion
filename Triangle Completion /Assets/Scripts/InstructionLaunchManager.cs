@@ -61,6 +61,7 @@ public class InstructionLaunchManager : MonoBehaviour
         }
         else if (numSpace==4)
         {
+            Destroy(instruction);
             StartGame();
         }
         
@@ -84,7 +85,6 @@ public class InstructionLaunchManager : MonoBehaviour
 
         //Reset Text
         welcome.text = "";
-        instruction.text = "";
 
         //Triggers IEnumerator
         StartCoroutine(StartLoad());
@@ -127,5 +127,6 @@ public class InstructionLaunchManager : MonoBehaviour
         canvasGroup.alpha = targetValue;
     }
 
+  
    
 }
