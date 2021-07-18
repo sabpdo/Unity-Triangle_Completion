@@ -36,7 +36,7 @@ public class ThirdHallway : MonoBehaviour
         startPosition = new Vector3(-58, 3, 55);*/
 
         //Get Components from Main Script
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         TrialManager TM = player.GetComponent<TrialManager>();
         left = TM.left;
         openField = TM.openField;
@@ -104,7 +104,7 @@ public class ThirdHallway : MonoBehaviour
     void Update()
     {
         //Get left from Main Script and get info if OpenField or not from Main Script
-        GameObject player = GameObject.Find("Camera View");
+        GameObject player = GameObject.Find("Player");
         TrialManager trialManager = player.GetComponent<TrialManager>();
         TrialManager TM = trialManager;
         left = TM.left;
