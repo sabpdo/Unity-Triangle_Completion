@@ -1362,7 +1362,7 @@ MonoBehaviour:
     type: 3}
   singleWall: {fileID: 6219251559030161910, guid: 11add561dea6545c09e6a1503996a877,
     type: 3}
-  startingPole: {fileID: 100014, guid: 01f2de5a3c67945c9850b6746f8c452c, type: 3}
+  startingPole: {fileID: 1200492294}
   SecondPole: {fileID: 108536515}
   ThirdPole: {fileID: 1908688549}
   cylinder: {fileID: 380569551754790368, guid: 404691d0e99754fe48f80badd8b9fb55, type: 3}
