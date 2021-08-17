@@ -43,12 +43,14 @@ namespace Data
             playerPos = GameObject.Find("Player").transform.position;
             playerRot = GameObject.Find("Player").transform.eulerAngles;
 
+            GameObject TM = GameObject.Find("TM");
+            TrialManager TrialManager = TM.GetComponent<TrialManager>();
             trial = TrialManager.trialnum.ToString();
-            Participant = PlayerPrefs.GetString("PrefParticipant");
+            /*Participant = PlayerPrefs.GetString("PrefParticipant");
             Age = PlayerPrefs.GetString("PrefAge");
             Sex = PlayerPrefs.GetString("PrefSex");
-            Handedness = PlayerPrefs.GetString("PrefHand");
-            typeTriangle = TM.typeTriangle;
+            Handedness = PlayerPrefs.GetString("PrefHand");*/
+            typeTriangle = TrialManager.typeTriangle;
             left = getLeft();
 
             GameObject player = GameObject.Find("Player");
@@ -67,12 +69,12 @@ namespace Data
             pctAngular180Error = Mathf.Abs(angularError / 180).ToString();
             
             CSVManager.AppendToReport(
-                new string[29] {
+                new string[18] {
                 trial,
-                Participant,
+                /*Participant,
                 Age,
                 Sex,
-                Handedness,
+                Handedness,*/
                 typeTriangle,
                 left,
                 startingPoleLocation,
@@ -84,13 +86,13 @@ namespace Data
                 inputAngle.ToString(),
                 angularError.ToString(),
                 pctAngular180Error,
-                totalTime,
+                /*totalTime,
                 totalTime1,
                 firstLegTime,
                 firstTurnTime,
                 secondLegTime,
                 secondTurnTime,
-                thirdLegTime,
+                thirdLegTime,*/
                 playerPos.x.ToString(),
                 playerPos.y.ToString(),
                 playerPos.z.ToString(),
@@ -116,7 +118,9 @@ namespace Data
         //Methods to Obtain Data
         public static string getLeft()
         {
-            if (TM.left == true)
+            GameObject TM = GameObject.Find("TM");
+            TrialManager TrialManager = TM.GetComponent<TrialManager>();
+            if (TrialManager.left == true)
                 return "left";
             else
             {
