@@ -7,12 +7,12 @@ public static class CSVManager
     private static string reportDirectoryName = "Report";
     private static string reportFileName = "Report1.csv";
     private static string reportSeparator = ",";
-    private static string[] reportHeaders = new string[29] {
-        "Trial #",
+    private static string[] reportHeaders = new string[18] {
+        "Trial #",/*
         "Participant #",
         "Age",
         "Sex",
-        "Handedness",
+        "Handedness",*/
         "Type Triangle",
         "Left or Right", 
         "Starting Pole Location",
@@ -24,13 +24,13 @@ public static class CSVManager
         "Input Angle",
         "Angular Error",
         "Percent Angular 180 Error",
-        "Total Trial Time (Updating)",
+        /*"Total Trial Time (Updating)",
         "Total Trial Time (Final)",
         "Trial Time During First Leg",
         "Trial Time During First Turn",
         "Trial Time During Second Leg",
         "Trial Time During Second Turn", 
-        "Trial Time During Third Leg",
+        "Trial Time During Third Leg",*/
         "Location X",
         "Location Y",
         "Location Z",
