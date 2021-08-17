@@ -238,7 +238,9 @@ public class DataManager : MonoBehaviour
 
     public float GetInputAngle()
     {
-        float wallAngle = GetComponent<ThirdHallway>().yrotation;
+        GameObject player = GameObject.Find("Player");
+        ThirdHallway TH = player.GetComponent<ThirdHallway>();
+        float wallAngle = TH.yrotation;
         float angle = 0;
 
         //The angle the person turns is essentially the angle they were in the second hallway minus how much they turned (the absolute
