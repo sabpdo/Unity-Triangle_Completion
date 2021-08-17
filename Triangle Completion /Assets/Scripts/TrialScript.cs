@@ -23,7 +23,6 @@ public class TrialScript : MonoBehaviour
     private int numSpace = 0;
 
     //All Main GameObjects
-    public GameObject wall;
     public GameObject longWall;
     public GameObject singleWall;
     public GameObject startingPole;
@@ -66,7 +65,7 @@ public class TrialScript : MonoBehaviour
 
         //Set Initial GameObjects Active or not Active
         startingPole.SetActive(true);
-        wall.SetActive(true);
+        singleWall.SetActive(true);
         openFieldPole.SetActive(false);
         secondOpenFieldPole.SetActive(false);
 
@@ -325,7 +324,7 @@ public class TrialScript : MonoBehaviour
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 69);
-                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 90f, 00f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(0f, 0f, 0f));
                                 newBackWall2.tag = "wall2";
                                 
                             }
@@ -365,18 +364,18 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((7 + (x * -5 * Mathf.Sqrt(3))), 3, 55 + (x*-5));
-                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 240f, 90f));
+                                    GameObject newWall2 = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 240f, 0f));
                                     newWall2.tag = "wall2";
                                 }
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3((7 + (x * -5 * Mathf.Sqrt(3))), 3, 46 + (x * -5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 240f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 240f, 0f));
                                     newWall2R.tag = "wall2";
                                 }
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 49);
-                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 150f, 90f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 150f, 0f));
                                 newBackWall2.tag = "wall2";
                             }
                             else if (TM.type == TM.acute2)
@@ -385,18 +384,18 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((x * -5 * Mathf.Sqrt(3)), 3, 52 + (x * -5));
-                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 240f, 90f));
+                                    GameObject newWall2 = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 240f, 0f));
                                     newWall2.tag = "wall2";
                                 }
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3((x * -5 * Mathf.Sqrt(3)), 3, 46 + (x * -5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 240f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 240f, 0f));
                                     newWall2R.tag = "wall2";
                                 }
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 49);
-                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 150f, 90f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 150f, 0f));
                                 newBackWall2.tag = "wall2";
                             }
                         }
@@ -435,21 +434,21 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 33 + (x*5));
-                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 300f, 90f));
+                                    GameObject newWall2 = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 300f, 0f));
                                     newWall2.tag = "wall2";
                                 }
 
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 25 + (x * 5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 300f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 300f, 0f));
                                     newWall2R.tag = "wall2";
                                 }
 
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 29);
-                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 210f, 90f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 210f, 0f));
                                 newBackWall2.tag = "wall2";
                                 
                             }
@@ -459,20 +458,20 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 73 + (x * 5));
-                                    GameObject newWall2 = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 300f, 90f));
+                                    GameObject newWall2 = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 300f, 0f));
                                     newWall2.tag = "wall2";
                                 }
 
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * -5 * Mathf.Sqrt(3))), 3, 65 + (x * 5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 300f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 300f, 0f));
                                     newWall2R.tag = "wall2";
                                 }
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(3, 3, 69);
-                                GameObject newBackWall2 = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 210f, 90f));
+                                GameObject newBackWall2 = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 210f, 0f));
                                 newBackWall2.tag = "wall2";
                                 
                             }
@@ -533,20 +532,20 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(-8 + (8 * x), 3, 73);
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 90f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 90f, 0f));
                                     newWall2R.tag = "wall2R";
                                 }
 
                                 for (int x = 1; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(-8 + (8 * x), 3, 65);
-                                    GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 90f, 90f));
+                                    GameObject newWall2RR = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 90f, 0f));
                                     newWall2RR.tag = "wall2R";
                                 }
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(-3, 3, 69);
-                                GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 0f, 90f));
+                                GameObject newBackWall2R = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 0f, 0f));
                                 newBackWall2R.tag = "wall2R";
                                 
                             }
@@ -584,20 +583,20 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((x * 5 * Mathf.Sqrt(3)), 3, 46 + (x * -5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 120f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 120f, 0f));
                                     newWall2R.tag = "wall2R";
                                 }
 
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3((x * 5 * Mathf.Sqrt(3)), 3, 52+ (x * -5));
-                                    GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 120f, 90f));
+                                    GameObject newWall2RR = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 120f, 0f));
                                     newWall2RR.tag = "wall2R";
                                 }
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(-3, 3, 49);
-                                GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 30f, 90f));
+                                GameObject newBackWall2R = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 30f, 0f));
                                 newBackWall2R.tag = "wall2R";
                                 
                             }
@@ -607,20 +606,20 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3((x * 5 * Mathf.Sqrt(3)), 3, 46 + (x * -5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 120f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 120f, 0f));
                                     newWall2R.tag = "wall2R";
                                 }
 
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(x * 5 * Mathf.Sqrt(3), 3, 52 + (x * -5));
-                                    GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 120f, 90f));
+                                    GameObject newWall2RR = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 120f, 0f));
                                     newWall2RR.tag = "wall2R";
                                 }
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(-3, 3, 49);
-                                GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, 30f, 90f));
+                                GameObject newBackWall2R = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, 30f, 0f));
                                 newBackWall2R.tag = "wall2R";
                                 
                             }
@@ -658,20 +657,20 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 33 + (x * 5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 60f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 60f, 0f));
                                     newWall2R.tag = "wall2R";
                                 }
 
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 25 + (x * 5));
-                                    GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 60f, 90f));
+                                    GameObject newWall2RR = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 60f, 0f));
                                     newWall2RR.tag = "wall2R";
                                 }
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(-3, 3, 29);
-                                GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, -30f, 90f));
+                                GameObject newBackWall2R = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, -30f, 0f));
                                 newBackWall2R.tag = "wall2R";
                                 
                             }
@@ -681,20 +680,20 @@ public class TrialScript : MonoBehaviour
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 72 + (x * 5));
-                                    GameObject newWall2R = (GameObject)Instantiate(wall, posSecond, Quaternion.Euler(0f, 60f, 90f));
+                                    GameObject newWall2R = (GameObject)Instantiate(singleWall, posSecond, Quaternion.Euler(0f, 60f, 0f));
                                     newWall2R.tag = "wall2R";
                                 }
 
                                 for (int x = 0; x < 20; x++)
                                 {
                                     Vector3 posSecond2 = new Vector3(((x * 5 * Mathf.Sqrt(3))), 3, 66 + (x * 5));
-                                    GameObject newWall2RR = (GameObject)Instantiate(wall, posSecond2, Quaternion.Euler(0f, 60f, 90f));
+                                    GameObject newWall2RR = (GameObject)Instantiate(singleWall, posSecond2, Quaternion.Euler(0f, 60f, 0f));
                                     newWall2RR.tag = "wall2R";
                                 }
 
                                 //Create back wall
                                 Vector3 pos3 = new Vector3(-4, 3, 69);
-                                GameObject newBackWall2R = (GameObject)Instantiate(wall, pos3, Quaternion.Euler(90f, -30f, 90f));
+                                GameObject newBackWall2R = (GameObject)Instantiate(singleWall, pos3, Quaternion.Euler(90f, -30f, 0f));
                                 newBackWall2R.tag = "wall2R";
                                 
                             }
