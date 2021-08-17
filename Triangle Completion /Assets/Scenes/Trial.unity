@@ -474,6 +474,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: openFieldPoleblend
       objectReference: {fileID: 0}
+    - target: {fileID: 6839664750449436679, guid: 7044f67ce27f040069911a71f595152e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7044f67ce27f040069911a71f595152e, type: 3}
 --- !u!1 &328505436 stripped
@@ -1400,8 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instructions: {fileID: 1657434014}
   TM: {fileID: 1304496240}
-  openField: 0
-  wall: {fileID: 2503900626345435621, guid: 86ef564740eae4006be1159b25b1568d, type: 3}
+  openField: 1
   longWall: {fileID: 4263719992790101326, guid: 4c2d6c305df9e41089dee639608efaa1,
     type: 3}
   singleWall: {fileID: 6219251559030161910, guid: 11add561dea6545c09e6a1503996a877,
