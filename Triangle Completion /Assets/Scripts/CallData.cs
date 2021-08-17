@@ -6,7 +6,6 @@ public class CallData : MonoBehaviour
     public float time = 0;
     private bool safe = false;
     private bool timeEnabled = false;
-    public GameObject firstins;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +13,10 @@ public class CallData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (firstins == null)
-        {
-            if (safe == false)
-            {
-                timeEnabled = true;
-            }
-        }
+        
+        timeEnabled = true;
+        
+       
         if (timeEnabled == true)
         {
             time += Time.deltaTime;
