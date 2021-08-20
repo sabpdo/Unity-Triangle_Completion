@@ -1405,10 +1405,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instructions: {fileID: 1657434014}
   TM: {fileID: 1304496240}
-  openField: 1
+  openField: 0
   longWall: {fileID: 4263719992790101326, guid: 4c2d6c305df9e41089dee639608efaa1,
     type: 3}
   singleWall: {fileID: 6219251559030161910, guid: 11add561dea6545c09e6a1503996a877,
+    type: 3}
+  doubleHallway: {fileID: 8227765101836889243, guid: bdb53b2976c2e4f28ac4dd5e51d41945,
     type: 3}
   startingPole: {fileID: 1200492294}
   SecondPole: {fileID: 108536515}
@@ -1560,14 +1562,14 @@ MonoBehaviour:
   obtuse1: 305
   obtuse2: 306
   openField: 0
-  practiceViewed: 0
+  practiceViewed: 1
   practiceDone: 0
-  current: 0
-  type: 0
+  current: 3
+  type: 306
   thirdPoleLocation: {x: 0, y: 0, z: 0}
   thirdOpenPoleLocation: {x: 0, y: 0, z: 0}
   typeTriangle: 
-  left: 0
+  left: 1
 --- !u!82 &1866324778
 AudioSource:
   m_ObjectHideFlags: 0
