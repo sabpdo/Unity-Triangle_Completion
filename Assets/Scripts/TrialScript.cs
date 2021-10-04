@@ -173,7 +173,7 @@ public class TrialScript : MonoBehaviour
                 cylinder.tag = "cylinder";
                 cylinder.transform.position = SecondCoordinates[TM.current].transform.position;
 
-                player.transform.position = SecondCoordinates[TM.current].transform.position;
+                player.transform.position = new Vector3(SecondCoordinates[TM.current].transform.position.x, 0.5f, SecondCoordinates[TM.current].transform.position.z);
 
                 //Destroy previous hallway, second pole indicator
                 GameObject[] argo = GameObject.FindGameObjectsWithTag("wall");
