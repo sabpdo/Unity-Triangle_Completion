@@ -220,7 +220,6 @@ public class TrialManager : MonoBehaviour
         while (previous == current)
         {
             current = Random.Range(0, 4);
-
         }
     }
 }
